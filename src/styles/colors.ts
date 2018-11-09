@@ -8,7 +8,7 @@ export default {
   black: '#000',
 
   primary: '#fbce09',
-  secundary: '#e7e7e7',
+  secondary: '#e7e7e7',
 
   transparent: 'transparent',
   whiteTransparent: 'rgba(255, 255, 255, 0.2)',
