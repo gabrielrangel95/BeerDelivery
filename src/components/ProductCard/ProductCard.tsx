@@ -69,6 +69,6 @@ class ProductCard extends React.PureComponent<IProps, IState> {
       </CardContainer>
     );
   }
-};
+}
 
 export { ProductCard };
