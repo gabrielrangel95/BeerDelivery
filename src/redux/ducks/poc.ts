@@ -6,6 +6,7 @@ import { IGenericErrorAction } from '@interfaces/action';
 const initialState: IStateToProps = {
   data: [],
   getFailure: undefined,
+  getSuccess: undefined,
   loading: false
 };
 
@@ -15,20 +16,23 @@ export default function poc(state: IStateToProps = initialState, action: AnyActi
       return {
         ...state,
         loading: true,
-        getFailure: undefined
+        getFailure: undefined,
+        getSuccess: undefined
       };
     case Types.POC_GET_SUCCESS:
       return {
         ...state,
         data: (action as IPocSuccess).payload.data,
         loading: false,
+        getSuccess: true,
         getFailure: undefined
       };
-    case Types.POC_GET_SUCCESS:
+    case Types.POC_GET_FAILURE:
       return {
         ...state,
         loading: false,
-        getFailure: (action as IGenericErrorAction).payload.message
+        getFailure: (action as IGenericErrorAction).payload.message,
+        getSuccess: false
       };
     default:
       return state;

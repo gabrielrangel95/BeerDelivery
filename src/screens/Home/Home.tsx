@@ -41,6 +41,21 @@ class Home extends React.PureComponent<IProps, IState> {
     long: ''
   };
 
+  componentWillReceiveProps(nextProps: IProps) {
+    const { data, getSuccess, getFailure} = nextProps;
+    console.log(nextProps);
+    if (getFailure && getFailure !== this.props.getFailure) {
+      Alert.alert('Falha ao comunicar com o servidor!');
+    }
+    if (getSuccess && getSuccess !== this.props.getSuccess) {
+      if (data.length > 0) {
+        // navigate to products
+      } else {
+        Alert.alert('Putzs, tá fora da nossa área...');
+      }
+    }
+  }
+
   handleLocationPress = (data, details) => {
     const dataLocation = data.geometry ? data.geometry.location : null;
     const detailsLocation = details.geometry ? details.geometry.location : null;
@@ -101,9 +116,7 @@ class Home extends React.PureComponent<IProps, IState> {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.poc.data,
-  loading: state.poc.loading,
-  getFailure: state.poc.getFailure
+  ...state.poc
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ ...PocActions }, dispatch);

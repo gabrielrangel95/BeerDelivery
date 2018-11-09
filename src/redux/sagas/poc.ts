@@ -28,7 +28,7 @@ function* getPocs(action: IPocRequest) {
     };
     const result = yield client.query({ query: POC_QUERY, variables });
     console.log(result);
-    yield put(Actions.getPocSuccess(result.data));
+    yield put(Actions.getPocSuccess(result.data.pocSearch));
   } catch (err) {
     console.log(err);
     yield put(Actions.getPocFailure(err));

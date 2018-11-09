@@ -25,6 +25,7 @@ export interface IStateToProps {
   data: Array<IPoc>;
   loading: boolean;
   getFailure: string | undefined;
+  getSuccess: boolean | undefined;
 }
 
 export interface IDispatchToProps {
