@@ -22,7 +22,7 @@ class Products extends React.Component<IProps, any> {
     headerStyle: {
       backgroundColor: colors.black
     },
-    headerTintColor: colors.primary,
+    headerTintColor: colors.white,
     headerTitleStyle: {
       fontWeight: 'bold'
     }
@@ -30,8 +30,8 @@ class Products extends React.Component<IProps, any> {
 
   componentDidMount() {
     const { getCategoriesRequest, getProductsRequest } = this.props;
-    getProductsRequest(0);
-    getCategoriesRequest();
+    getProductsRequest(0); // will get all products
+    getCategoriesRequest(); // will get all categories
   }
 
   render() {

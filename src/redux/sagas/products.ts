@@ -23,12 +23,13 @@ export function* watchGetCategories() {
 
 function* getProducts(action: IProductsGetRequest) {
   try {
+    // get the pocs data
     const { data } = yield select((state: IReduxState) => {
       return state.poc;
     });
     const { categoryId } = action.payload;
     const variables = {
-      id: data[0].id,
+      id: data[0].id, // first poc id from the pocs data array
       search: "",
       categoryId: categoryId
     };

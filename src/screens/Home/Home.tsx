@@ -43,19 +43,19 @@ class Home extends React.PureComponent<IProps, IState> {
 
   componentWillReceiveProps(nextProps: IProps) {
     const { data, getSuccess, getFailure} = nextProps;
-    if (getFailure && getFailure !== this.props.getFailure) {
+    if (getFailure && getFailure !== this.props.getFailure) { // if we get and failure when call getPoc
       Alert.alert('Falha ao comunicar com o servidor!');
     }
     if (getSuccess && getSuccess !== this.props.getSuccess) {
       if (data.length > 0) {
         this.props.navigation.navigate("Products");
-      } else {
+      } else { // dont have any poc near by
         Alert.alert('Putzs, tá fora da nossa área...');
       }
     }
   }
 
-  handleLocationPress = (data, details) => {
+  handleLocationPress = (data, details) => { // gets the lat and long and put their on the state
     const dataLocation = data.geometry ? data.geometry.location : null;
     const detailsLocation = details.geometry ? details.geometry.location : null;
     if (dataLocation || detailsLocation) {
@@ -69,7 +69,7 @@ class Home extends React.PureComponent<IProps, IState> {
 
   onPressVerProdutos = () => {
     const { lat, long } = this.state;
-    if (lat && long) {
+    if (lat && long) { // cheack if the user set an address
       this.props.getPocRequest({ lat, long});
     } else {
       Alert.alert('Insira o endereço de entrega!');
