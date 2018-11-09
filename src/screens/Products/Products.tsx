@@ -7,11 +7,16 @@ import { Creators as ProductsActions } from '@redux/actions/products';
 // interfaces
 import { IDispatchToProps, IStateToProps } from '@interfaces/products';
 
+// components
+import { FlatList } from 'react-native';
+import { ProductCard } from '@components';
 // ui
 import { colors } from '@styles';
 import {
+  LoaderContainer,
   MainContainer,
-  Title
+  CategoriesContainer,
+  Loader
 } from './ProductsStyle';
 
 type IProps = IStateToProps & IDispatchToProps;
@@ -34,11 +39,30 @@ class Products extends React.Component<IProps, any> {
     getCategoriesRequest(); // will get all categories
   }
 
+  componentWillReceiveProps(nextProps: IProps) {
+    console.log(nextProps);
+  }
+
+  renderItem = (item) => <ProductCard item={item} />;
+
   render() {
-    console.log(this.props);
+    const { loading, productsData } = this.props;
+    if (loading) {
+      return(
+        <LoaderContainer>
+          <Loader color={colors.black} />
+        </LoaderContainer>
+      );
+    }
     return(
       <MainContainer>
-        <Title>Products</Title>
+        <FlatList
+          data={productsData}
+          numColumns={2}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => item.title}
+          contentContainerStyle={{ paddingVertical: 12 }}
+        />
       </MainContainer>
     );
   }
