@@ -41,7 +41,6 @@ function* getProducts(action: IProductsGetRequest) {
       const item = element.productVariants[0];
       products.push(item);
     });
-    console.log(products);
     yield put(Actions.getProductsSuccess(products));
   } catch (err) {
     console.log(err);
