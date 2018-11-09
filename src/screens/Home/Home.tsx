@@ -8,7 +8,7 @@ import { Creators as PocActions } from '@redux/actions/poc';
 
 // interfaces
 import { IDispatchToProps, IStateToProps } from '@interfaces/poc';
-
+import { NavigationInjectedProps } from 'react-navigation';
 // components
 import { Alert } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -24,7 +24,7 @@ import {
 // utils
 const defaultPlace = { description: 'R. Américo Brasiliense, São Paulo', geometry: { location: { lat: -23.632919, lng: -46.699453 } } };
 
-type IProps = IStateToProps & IDispatchToProps;
+type IProps = IStateToProps & IDispatchToProps & NavigationInjectedProps;
 
 interface IState {
   lat: string;
@@ -43,13 +43,12 @@ class Home extends React.PureComponent<IProps, IState> {
 
   componentWillReceiveProps(nextProps: IProps) {
     const { data, getSuccess, getFailure} = nextProps;
-    console.log(nextProps);
     if (getFailure && getFailure !== this.props.getFailure) {
       Alert.alert('Falha ao comunicar com o servidor!');
     }
     if (getSuccess && getSuccess !== this.props.getSuccess) {
       if (data.length > 0) {
-        // navigate to products
+        this.props.navigation.navigate("Products");
       } else {
         Alert.alert('Putzs, tá fora da nossa área...');
       }

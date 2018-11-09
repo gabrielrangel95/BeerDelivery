@@ -1,9 +1,12 @@
 import { createStackNavigator } from 'react-navigation';
-import { Home } from '@screens';
+import { Home, Products } from '@screens';
 
 const Router = createStackNavigator({
   Home: {
     screen: Home
+  },
+  Products: {
+    screen: Products
   }
 });
 
