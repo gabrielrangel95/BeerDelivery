@@ -10,7 +10,7 @@ import { Types } from '@redux/types';
 import { Creators as Actions } from '@redux/actions/products';
 
 // interfaces
-import { IProductsGetRequest, ICategoriesGetRequest } from '@interfaces/products';
+import { IProductsGetRequest, ICategoriesGetRequest, IProduct, IProductVariants } from '@interfaces/products';
 import { IReduxState } from '@interfaces/reduxState';
 
 export function* watchGetProducts() {
@@ -34,8 +34,15 @@ function* getProducts(action: IProductsGetRequest) {
       categoryId: categoryId
     };
 
-    const products = yield client.query({ query: PRODUCTS_QUERY, variables });
-    yield put(Actions.getProductsSuccess(products.data.poc.products));
+    const result = yield client.query({ query: PRODUCTS_QUERY, variables });
+    const productsArray = result.data.poc.products;
+    let products: Array<IProductVariants> = [];
+    productsArray.forEach((element: IProduct) => {
+      const item = element.productVariants[0];
+      products.push(item);
+    });
+    console.log(products);
+    yield put(Actions.getProductsSuccess(products));
   } catch (err) {
     console.log(err);
     yield put(Actions.getProductsFailure(err));

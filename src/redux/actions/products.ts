@@ -1,5 +1,5 @@
 import { Types } from '@redux/types';
-import { IDispatchToProps, IProduct, ICategories} from '@interfaces/products';
+import { IDispatchToProps, IProductVariants, ICategories} from '@interfaces/products';
 
 export const Creators: IDispatchToProps = {
   getProductsRequest: (categoryId: number) => ({
@@ -8,7 +8,7 @@ export const Creators: IDispatchToProps = {
       categoryId
     }
   }),
-  getProductsSuccess: (products: Array<IProduct>) => ({
+  getProductsSuccess: (products: Array<IProductVariants>) => ({
     type: Types.PRODUCTS_GET_SUCCESS,
     payload: {
       products
