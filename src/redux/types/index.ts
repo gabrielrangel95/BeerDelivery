@@ -1,0 +1,5 @@
+export const Types = {
+  POC_GET_REQUEST: 'poc/POC_GET_REQUEST',
+  POC_GET_SUCCESS: 'poc/POC_GET_SUCCESS',
+  POC_GET_FAILURE: 'poc/POC_GET_FAILURE'
+};
