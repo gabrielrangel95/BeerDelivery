@@ -9,7 +9,7 @@ import { IDispatchToProps, IStateToProps } from '@interfaces/products';
 
 // components
 import { FlatList } from 'react-native';
-import { ProductCard } from '@components';
+import { ProductCard, Button, CategoriesModal} from '@components';
 // ui
 import { colors } from '@styles';
 import {
@@ -21,7 +21,11 @@ import {
 
 type IProps = IStateToProps & IDispatchToProps;
 
-class Products extends React.Component<IProps, any> {
+interface IState {
+  categoriesModalVisible: boolean;
+}
+
+class Products extends React.Component<IProps, IState> {
   static navigationOptions = {
     title: 'Produtos',
     headerStyle: {
@@ -33,35 +37,62 @@ class Products extends React.Component<IProps, any> {
     }
   };
 
+  state = {
+    categoriesModalVisible: false
+  };
+
   componentDidMount() {
     const { getCategoriesRequest, getProductsRequest } = this.props;
     getProductsRequest(0); // will get all products
     getCategoriesRequest(); // will get all categories
   }
 
-  componentWillReceiveProps(nextProps: IProps) {
-    console.log(nextProps);
+  openCategoriesModal = () => {
+    this.setState({ categoriesModalVisible: true });
+  }
+
+  closeCategoriesModal = () => {
+    this.setState({ categoriesModalVisible: false });
+  }
+
+  confirmChageCategory = (categotyId) => {
+    console.log(categotyId);
+    this.props.getProductsRequest(categotyId);
+    this.closeCategoriesModal();
   }
 
   renderItem = (item) => <ProductCard item={item} />;
 
   render() {
-    const { loading, productsData } = this.props;
+    const { loading, productsData, categoriesData } = this.props;
+    const { categoriesModalVisible } = this.state;
     if (loading) {
-      return(
+      return (
         <LoaderContainer>
           <Loader color={colors.black} />
         </LoaderContainer>
       );
     }
-    return(
+    return (
       <MainContainer>
         <FlatList
           data={productsData}
           numColumns={2}
           renderItem={this.renderItem}
-          keyExtractor={(item, index) => item.title}
+          keyExtractor={(item) => item.title}
           contentContainerStyle={{ paddingVertical: 12 }}
+        />
+        <CategoriesContainer>
+          <Button
+            text="CATEGORIAS"
+            onPress={this.openCategoriesModal}
+          />
+        </CategoriesContainer>
+        <CategoriesModal
+          modalVisible={categoriesModalVisible}
+          categories={categoriesData}
+          closeModal={this.closeCategoriesModal}
+          confirmChageCategory={this.confirmChageCategory}
         />
       </MainContainer>
     );
