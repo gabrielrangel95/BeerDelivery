@@ -9,11 +9,6 @@ export const MainContainer = styled.View`
   padding: 24px 12px;
 `;
 
-export const MainText = styled.Text`
-  font-size: 24;
-  color: ${colors.white};
-`;
-
 export const Title = styled.Text`
   font-size: 32;
   font-weight: 700;
@@ -25,19 +20,27 @@ export const Subtitle = styled.Text`
   color: ${colors.white};
 `;
 
+export const ItemsContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  top: ${props => props.topSpace ? props.topSpace : 12};
+`;
+
 export const InputStyle = {
-  container: {
-    borderColor: 'transparent'
-  },
   textInputContainer: {
-    width: '80%',
-    backgroundColor: colors.white,
-    borderRadius: '6%'
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderTopWidth: 0,
+    borderBottomWidth: 0
   },
   description: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: colors.primary
   },
   predefinedPlacesDescription: {
-    color: colors.primary
+    color: colors.secondary
   }
 };
