@@ -8,7 +8,6 @@ import client from '@apollo/client';
 // redux
 import { Types } from '@redux/types';
 import { Creators as Actions } from '@redux/actions/poc';
-
 // interfaces
 import { IPocRequest } from '@interfaces/poc';
 
@@ -18,7 +17,6 @@ export function* watchGetPoc() {
 
 function* getPocs(action: IPocRequest) {
   try {
-    console.log(action.payload);
     const { params } = action.payload;
     const variables = {
       algorithm: "NEAREST",
@@ -27,7 +25,6 @@ function* getPocs(action: IPocRequest) {
       now: new Date().toISOString()
     };
     const result = yield client.query({ query: POC_QUERY, variables });
-    console.log(result);
     yield put(Actions.getPocSuccess(result.data.pocSearch));
   } catch (err) {
     console.log(err);
