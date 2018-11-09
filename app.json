@@ -1,18 +1,21 @@
 {
   "expo": {
     "name": "BeerDelivery",
-    "description": "This project is really great.",
+    "description": "Expo React Native Project using:\n- GraphQL\n- Redux / Redux Saga\n- Styled Components",
     "slug": "BeerDelivery",
     "privacy": "public",
     "sdkVersion": "31.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,6 +25,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "githubUrl": "https://github.com/gabrielrangel95/BeerDelivery"
   }
 }
